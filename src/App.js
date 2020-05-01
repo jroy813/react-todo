@@ -10,11 +10,28 @@ import './App.css';
 
 class App extends Component {
     state = {
-        todos: []
-    }
-    
-    componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10').then(res=>this.setState({todos: res.data}))
+        todos: [
+            {
+            "id": 1,
+            "title": "delectus aut autem",
+            "completed": false
+            },
+            {
+            "id": 2,
+            "title": "quis ut nam facilis et officia qui",
+            "completed": false
+            },
+            {
+            "id": 3,
+            "title": "fugiat veniam minus",
+            "completed": false
+            },
+            {
+            "id": 4,
+            "title": "et porro tempora",
+            "completed": true
+            },
+        ]
     }
     
     markComplete = (id) => {
@@ -28,14 +45,16 @@ class App extends Component {
     }
     
     delTodo = (id) => {
-        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then( res =>this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }) )
+        this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
     }
     
     addTodo = (title) => {
-        axios.post('https://jsonplaceholder.typicode.com/todos', {
+        const newTodo = {
+            id: 4,
             title,
             completed: false
-        }).then(res=>this.setState({ todos: [...this.state.todos, res.data] }));
+        }
+        this.setState({ todos: [...this.state.todos, newTodo] });
     }
   
     render() { 
