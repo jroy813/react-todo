@@ -4,7 +4,6 @@ import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import Header from './components/layout/Header';
 import About from './components/pages/About';
-import axios from 'axios';
 
 import './App.css';
 
@@ -57,9 +56,11 @@ class App extends Component {
         this.setState({ todos: [...this.state.todos, newTodo] });
     }
   
-    render() { 
+    render() {
+        const baseName = process.env.NODE_ENV === 'production' ? '/react/todo/' : '/';
+        
         return (
-            <Router>
+            <Router basename={baseName}>
                 <div className="App">
                     <div className="container">
                         <Header />
